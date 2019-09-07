@@ -13,7 +13,7 @@ ItemMarker.inventories = {
 
 function ItemMarker:ToogleItem(itemInstanceId, inventorySlotControl)
     ItemMarkerData:ToogleItem(itemInstanceId)
-    ItemMarkerControl:RefreshControl(itemInstanceId, inventorySlotControl)
+    ItemMarkerControl:RefreshAll(itemInstanceId, inventorySlotControl)
 end
 
 function ItemMarker:AddMenuOption(inventorySlotControl)
@@ -49,6 +49,8 @@ function ItemMarker:HookPlayerInventories()
 end
 
 function ItemMarker:Initialize()
+    LibFilters3:InitializeLibFilters()
+
     ItemMarkerData:Initialize()
     self:HookPlayerInventories()
     ZO_PreHook("ZO_InventorySlot_ShowContextMenu", function(inventorySlotControl) self:AddMenuOption(inventorySlotControl) end)

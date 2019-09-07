@@ -86,13 +86,33 @@ function ItemMarkerControl:RefreshControl(itemInstanceId, control)
     markerControl:SetAnchor(markerAnchor, anchorTarget, markerAnchor, offsetX, offsetY)    
 end
 
+function ItemMarkerControl:RefreshAll()
+    local filterTypes = {
+        LF_INVENTORY,
+        LF_BANK_WITHDRAW,
+        LF_BANK_DEPOSIT,
+        LF_GUILDBANK_WITHDRAW,
+        LF_GUILDBANK_DEPOSIT,
+        LF_SMITHING_DECONSTRUCT,
+        LF_SMITHING_IMPROVEMENT,
+        LF_ENCHANTING_CREATION,
+        LF_ENCHANTING_EXTRACTION,
+        LF_CRAFTBAG,
+        LF_QUICKSLOT
+    }
+
+    for _, filterType in pairs(filterTypes) do
+        LibFilters3:RequestUpdate(filterType)
+    end
+end
+
 function ItemMarkerControl:GetInfoFromInventorySlotControl(inventorySlotControl)
     local bagId, slotIndex
     local link = nil
     local slotType = ZO_InventorySlot_GetType(inventorySlotControl)
 
     if slotType == SLOT_TYPE_ITEM or
-       slotType == SLOT_TYPE_EQUIPMENT or
+    --    slotType == SLOT_TYPE_EQUIPMENT or
        slotType == SLOT_TYPE_STORE_BUY or
        slotType == SLOT_TYPE_STORE_BUYBACK or
        slotType == SLOT_TYPE_BANK_ITEM or
