@@ -1,6 +1,10 @@
 ItemMarkerData = {}
 
 ItemMarkerData.savedVariablesFile = "ItemMarkerSavedVariables"
+ItemMarkerData.markersInfo = {
+    star = [[/esoui/art/campaign/overview_indexicon_bonus_disabled.dds]]
+}
+
 
 function ItemMarkerData:GetMarkerAnchor()
     return self.savedVariables.markerAnchor
@@ -10,7 +14,7 @@ function ItemMarkerData:GetMarkerInfo(itemInstanceId)
     local isItemMarked = self:IsItemMarked(itemInstanceId)
 
     if isItemMarked then
-        return self.savedVariables.markersInfo[self.savedVariables.marker], ItemMarkerUtils:HexToRGB(self.savedVariables.markerColor) 
+        return self.markersInfo[self.savedVariables.marker], ItemMarkerUtils:HexToRGB(self.savedVariables.markerColor) 
     end
 end
 
@@ -27,9 +31,6 @@ function ItemMarkerData:Initialize()
         markedItems = {},
         marker = "star",
         markerAnchor = 3,
-        markersInfo = {
-            star = [[/esoui/art/campaign/overview_indexicon_bonus_disabled.dds]]
-        },
         markerColor = "ffff00"
     }
 
