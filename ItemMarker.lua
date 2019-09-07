@@ -34,13 +34,12 @@ function ItemMarker:HookControls()
     for inventoryType, inventory in pairs(PLAYER_INVENTORY.inventories) do
         if self.inventories[inventoryType] and
            inventory.listView and inventory.listView.dataTypes and inventory.listView.dataTypes[1] then
-            -- ZO_PreHook(listView.dataTypes[1], "setupCallback", function(control, slot)
-            --     d(inventoryType)
-            --     local itemInstanceId = ItemMarkerControl:GetInfoFromInventorySlotControl(control)
-            --     if itemInstanceId then
-            --         ItemMarkerControl:RefreshControl(itemInstanceId, control)
-            --     end
-            -- end)
+            ZO_PreHook(inventory.listView.dataTypes[1], "setupCallback", function(control, slot)
+                local itemInstanceId = ItemMarkerControl:GetInfoFromControl(control)
+                if itemInstanceId then
+                    ItemMarkerControl:RefreshControl(itemInstanceId, control)
+                end
+            end)
         end
     end
 end

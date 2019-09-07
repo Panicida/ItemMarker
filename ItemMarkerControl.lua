@@ -87,10 +87,10 @@ function ItemMarkerControl:RefreshControl(itemInstanceId, control)
 end
 
 function ItemMarkerControl:GetInfoFromInventorySlotControl(inventorySlotControl)
-    local bag, index
+    local bagId, slotIndex
     local link = nil
     local slotType = ZO_InventorySlot_GetType(inventorySlotControl)
-    
+
     if slotType == SLOT_TYPE_ITEM or
        slotType == SLOT_TYPE_EQUIPMENT or
        slotType == SLOT_TYPE_STORE_BUY or
@@ -101,13 +101,22 @@ function ItemMarkerControl:GetInfoFromInventorySlotControl(inventorySlotControl)
        slotType == SLOT_TYPE_CRAFTING_COMPONENT or
        slotType == SLOT_TYPE_PENDING_CRAFTING_COMPONENT or
        slotType == SLOT_TYPE_CRAFT_BAG_ITEM then
-        bag, index = ZO_Inventory_GetBagAndIndex(inventorySlotControl)
-        link = GetItemLink(bag, index)
+        bagId, slotIndex = ZO_Inventory_GetBagAndIndex(inventorySlotControl)
+        link = GetItemLink(bagId, slotIndex)
     end
 
     if link and ItemMarkerUtils:IsItemLink(link) then
-        return GetItemInstanceId(bag, index)
+        return GetItemInstanceId(bagId, slotIndex)
     end
 
     return nil
+end
+
+function ItemMarkerControl:GetInfoFromControl(control)
+    local bagId, slotIndex
+
+    bagId = control.dataEntry.data.bagId
+    slotIndex = control.dataEntry.data.slotIndex
+
+    return GetItemInstanceId(bagId, slotIndex)
 end
