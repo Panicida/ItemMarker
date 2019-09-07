@@ -86,10 +86,10 @@ function ItemMarkerControl:RefreshControl(itemInstanceId, control)
     markerControl:SetAnchor(markerAnchor, anchorTarget, markerAnchor, offsetX, offsetY)    
 end
 
-function ItemMarkerControl:GetInfoFromControl(control)
+function ItemMarkerControl:GetInfoFromInventorySlotControl(inventorySlotControl)
     local bag, index
     local link = nil
-    local slotType = ZO_InventorySlot_GetType(control)
+    local slotType = ZO_InventorySlot_GetType(inventorySlotControl)
     
     if slotType == SLOT_TYPE_ITEM or
        slotType == SLOT_TYPE_EQUIPMENT or
@@ -101,7 +101,7 @@ function ItemMarkerControl:GetInfoFromControl(control)
        slotType == SLOT_TYPE_CRAFTING_COMPONENT or
        slotType == SLOT_TYPE_PENDING_CRAFTING_COMPONENT or
        slotType == SLOT_TYPE_CRAFT_BAG_ITEM then
-        bag, index = ZO_Inventory_GetBagAndIndex(control)
+        bag, index = ZO_Inventory_GetBagAndIndex(inventorySlotControl)
         link = GetItemLink(bag, index)
     end
 

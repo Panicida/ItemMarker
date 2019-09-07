@@ -7,24 +7,24 @@ ItemMarker.inventories = {
     1
 }
 
-function ItemMarker:ToogleItem(itemInstanceId, inventorySlot)
+function ItemMarker:ToogleItem(itemInstanceId, inventorySlotControl)
     ItemMarkerData:ToogleItem(itemInstanceId)
-    ItemMarkerControl:RefreshControl(itemInstanceId, inventorySlot)
+    ItemMarkerControl:RefreshControl(itemInstanceId, inventorySlotControl)
 end
 
-function ItemMarker:AddMenuOption(control)
-    local itemInstanceId = ItemMarkerControl:GetInfoFromControl(control)
+function ItemMarker:AddMenuOption(inventorySlotControl)
+    local itemInstanceId = ItemMarkerControl:GetInfoFromInventorySlotControl(inventorySlotControl)
 
     if itemInstanceId then
         local isItemMarked = ItemMarkerData:IsItemMarked(itemInstanceId)
 
         if not isItemMarked then
             zo_callLater(function ()
-                AddCustomMenuItem(GetString(STR_ITEMMARKER_MARK_ITEM), function() self:ToogleItem(itemInstanceId, control) end)
+                AddCustomMenuItem(GetString(STR_ITEMMARKER_MARK_ITEM), function() self:ToogleItem(itemInstanceId, inventorySlotControl) end)
             end, 50)
         else
             zo_callLater(function ()
-                AddCustomMenuItem(GetString(STR_ITEMMARKER_UNMARK_ITEM), function() self:ToogleItem(itemInstanceId, control) end)
+                AddCustomMenuItem(GetString(STR_ITEMMARKER_UNMARK_ITEM), function() self:ToogleItem(itemInstanceId, inventorySlotControl) end)
             end, 50)
         end
     end
@@ -36,7 +36,7 @@ function ItemMarker:HookControls()
            inventory.listView and inventory.listView.dataTypes and inventory.listView.dataTypes[1] then
             -- ZO_PreHook(listView.dataTypes[1], "setupCallback", function(control, slot)
             --     d(inventoryType)
-            --     local itemInstanceId = ItemMarkerControl:GetInfoFromControl(control)
+            --     local itemInstanceId = ItemMarkerControl:GetInfoFromInventorySlotControl(control)
             --     if itemInstanceId then
             --         ItemMarkerControl:RefreshControl(itemInstanceId, control)
             --     end
@@ -48,7 +48,7 @@ end
 function ItemMarker:Initialize()
     ItemMarkerData:Initialize()
     self:HookControls()
-    ZO_PreHook("ZO_InventorySlot_ShowContextMenu", function(control) self:AddMenuOption(control) end)
+    ZO_PreHook("ZO_InventorySlot_ShowContextMenu", function(inventorySlotControl) self:AddMenuOption(inventorySlotControl) end)
 end
 
 local function OnAddOnLoaded(eventCode, addonName)
