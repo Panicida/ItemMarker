@@ -1,0 +1,13 @@
+## Title: Item Marker
+## Author: Panicida
+## APIVersion: 100028
+## Version: 0.0.1
+## SavedVariables: ItemMarkerSavedVariables
+## DependsOn: LibCustomMenu
+
+i18n\en.lua
+i18n\$(language).lua
+ItemMarkerUtils.lua
+ItemMarkerData.lua
+ItemMarkerControl.lua
+ItemMarker.lua
