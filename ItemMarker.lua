@@ -4,7 +4,11 @@ ItemMarker.name = "ItemMarker"
 ItemMarker.event = "ItemMarkerEvent"
 ItemMarker.savedVariablesFile = "ItemMarkerSavedVariables"
 ItemMarker.inventories = {
-    1
+    INVENTORY_BACKPACK,
+    INVENTORY_GUILD_BANK,
+    INVENTORY_CRAFT_BAG,
+    INVENTORY_BANK,
+    INVENTORY_HOUSE_BANK
 }
 
 function ItemMarker:ToogleItem(itemInstanceId, inventorySlotControl)
@@ -30,7 +34,7 @@ function ItemMarker:AddMenuOption(inventorySlotControl)
     end
 end
 
-function ItemMarker:HookControls()
+function ItemMarker:HookPlayerInventories()
     for inventoryType, inventory in pairs(PLAYER_INVENTORY.inventories) do
         if self.inventories[inventoryType] and
            inventory.listView and inventory.listView.dataTypes and inventory.listView.dataTypes[1] then
@@ -46,7 +50,7 @@ end
 
 function ItemMarker:Initialize()
     ItemMarkerData:Initialize()
-    self:HookControls()
+    self:HookPlayerInventories()
     ZO_PreHook("ZO_InventorySlot_ShowContextMenu", function(inventorySlotControl) self:AddMenuOption(inventorySlotControl) end)
 end
 
