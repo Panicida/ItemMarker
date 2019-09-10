@@ -1,9 +1,6 @@
 ItemMarkerData = {}
 
-ItemMarkerData.savedVariablesFile = "ItemMarkerSavedVariables"
-ItemMarkerData.markersInfo = {
-    star = [[/esoui/art/campaign/overview_indexicon_bonus_disabled.dds]]
-}
+
 
 
 function ItemMarkerData:GetMarkerAnchor()
@@ -14,7 +11,7 @@ function ItemMarkerData:GetMarkerInfo(itemInstanceId)
     local isItemMarked = self:IsItemMarked(itemInstanceId)
 
     if isItemMarked then
-        return self.markersInfo[self.savedVariables.marker], ItemMarkerUtils:HexToRGB(self.savedVariables.markerColor) 
+        return ItemMarkerConfig.markersInfo[self.savedVariables.marker], ItemMarkerUtils:HexToRGB(self.savedVariables.markerColor) 
     end
 end
 
@@ -34,5 +31,5 @@ function ItemMarkerData:Initialize()
         markerColor = "ffff00"
     }
 
-    self.savedVariables = ZO_SavedVars:NewAccountWide(self.savedVariablesFile, 1, nil, defaults)
+    self.savedVariables = ZO_SavedVars:NewAccountWide(ItemMarkerConfig.savedVariablesFile, 1, nil, defaults)
 end
