@@ -1,6 +1,7 @@
 ItemMarkerControl = {}
 
 ItemMarkerControl.markerName = "ItemMarker"
+ItemMarkerControl.libFilters = LibFilters3
 
 function ItemMarkerControl:RefreshControl(itemInstanceId, control)
     local function getMarkerAnchorOffsets(markerAnchor)
@@ -87,8 +88,8 @@ function ItemMarkerControl:RefreshControl(itemInstanceId, control)
 end
 
 function ItemMarkerControl:RefreshAll()
-    for _, filterType in pairs(ItemMarkerConfig.filterTypes) do
-        LibFilters3:RequestUpdate(filterType)
+    for _, list in pairs(ItemMarkerConfig.lists) do
+        LibFilters3:RequestUpdate(list.filter)
     end
 end
 

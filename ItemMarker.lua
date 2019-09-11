@@ -24,12 +24,13 @@ function ItemMarker:AddMenuOption(inventorySlotControl)
 end
 
 function ItemMarker:HookPlayerInventories()
-    for inventoryType, inventory in pairs(PLAYER_INVENTORY.inventories) do
-        if ItemMarkerConfig.inventories[inventoryType] and
-           inventory.listView and inventory.listView.dataTypes and inventory.listView.dataTypes[1] then
-            ZO_PreHook(inventory.listView.dataTypes[1], "setupCallback", function(control, slot)
+    for _, list in pairs(ItemMarkerConfig.lists) do
+        if list.listView and list.listView.dataTypes and list.listView.dataTypes[1] then
+            ZO_PreHook(list.listView.dataTypes[1], "setupCallback", function(control, slot)
                 local itemInstanceId = ItemMarkerControl:GetInfoFromControl(control)
                 if itemInstanceId then
+                    wololo =  wololo + 1
+                    d(wololo)
                     ItemMarkerControl:RefreshControl(itemInstanceId, control)
                 end
             end)
@@ -38,8 +39,8 @@ function ItemMarker:HookPlayerInventories()
 end
 
 function ItemMarker:Initialize()
-    LibFilters3:InitializeLibFilters()
-
+    wololo = 1
+    ItemMarkerControl.libFilters:InitializeLibFilters()
     ItemMarkerData:Initialize()
     self:HookPlayerInventories()
     ZO_PreHook("ZO_InventorySlot_ShowContextMenu", function(inventorySlotControl) self:AddMenuOption(inventorySlotControl) end)
