@@ -12,13 +12,19 @@ ItemMarkerConfig.lists = {
         listView = ZO_PlayerInventoryList,
         filter = LF_INVENTORY
     },
+    CRAFTBAG = {
+        listView = ZO_CraftBagList,
+        filter = LF_CRAFTBAG
+    },
+    -- DECONSTRUCTION = {
+    --     listView = ZO_SmithingTopLevelDeconstructionPanelInventoryBackpack,
+    --     filter = 
+    -- }
 
     -- BACKPACK = ZO_PlayerInventoryList,
     -- QUICKSLOT = ZO_QuickSlotList,
     -- BANK = ZO_PlayerBankBackpack,
     -- GUILD_BANK = ZO_GuildBankBackpack,
-    -- CRAFTBAG = ZO_CraftBagList,
-    -- DECONSTRUCTION = ZO_SmithingTopLevelDeconstructionPanelInventoryBackpack,
     -- IMPROVEMENT = ZO_SmithingTopLevelImprovementPanelInventoryBackpack,
     -- ENCHANTING = ZO_EnchantingTopLevelInventoryBackpack,
     -- ALCHEMY = ZO_AlchemyTopLevelInventoryBackpack,
