@@ -29,8 +29,6 @@ function ItemMarker:HookPlayerInventories()
             ZO_PreHook(list.listView.dataTypes[1], "setupCallback", function(control, slot)
                 local itemInstanceId = ItemMarkerControl:GetInfoFromControl(control)
                 if itemInstanceId then
-                    wololo =  wololo + 1
-                    d(wololo)
                     ItemMarkerControl:RefreshControl(itemInstanceId, control)
                 end
             end)
@@ -39,7 +37,6 @@ function ItemMarker:HookPlayerInventories()
 end
 
 function ItemMarker:Initialize()
-    wololo = 1
     ItemMarkerControl.libFilters:InitializeLibFilters()
     ItemMarkerData:Initialize()
     self:HookPlayerInventories()
