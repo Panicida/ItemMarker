@@ -8,11 +8,13 @@ ItemMarkerConfig.markersInfo = {
 }
 
 ItemMarkerConfig.lists = {
-    BACKPACK = {
+    -- Backpack
+    [SLOT_TYPE_ITEM] = {
         listView = ZO_PlayerInventoryList,
         filter = LF_INVENTORY
     },
-    CRAFTBAG = {
+    -- Craftbag
+    [SLOT_TYPE_CRAFT_BAG_ITEM] = {
         listView = ZO_CraftBagList,
         filter = LF_CRAFTBAG
     },
@@ -31,8 +33,8 @@ ItemMarkerConfig.lists = {
     -- LIST_DIALOG = ZO_ListDialog1List,
 }
 
-ItemMarkerConfig.slotTypes = {
-    [SLOT_TYPE_ITEM] = true,
+-- ItemMarkerConfig.slotTypes = {
+--     [SLOT_TYPE_ITEM] = true,
     -- [SLOT_TYPE_EQUIPMENT] = true,
     -- [SLOT_TYPE_STORE_BUY] = true,
     -- [SLOT_TYPE_STORE_BUYBACK] = true,
@@ -41,5 +43,5 @@ ItemMarkerConfig.slotTypes = {
     -- [SLOT_TYPE_LOOT] = true,
     -- [SLOT_TYPE_CRAFTING_COMPONENT] = true,
     -- [SLOT_TYPE_PENDING_CRAFTING_COMPONENT] = true,
-    [SLOT_TYPE_CRAFT_BAG_ITEM] = true
-}
+    -- [SLOT_TYPE_CRAFT_BAG_ITEM] = true
+-- }

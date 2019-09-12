@@ -98,7 +98,7 @@ function ItemMarkerControl:GetInfoFromInventorySlotControl(inventorySlotControl)
     local link = nil
     local slotType = ZO_InventorySlot_GetType(inventorySlotControl)
 
-    if ItemMarkerConfig.slotTypes[slotType] then
+    if ItemMarkerConfig.lists[slotType] then
         bagId, slotIndex = ZO_Inventory_GetBagAndIndex(inventorySlotControl)
         link = GetItemLink(bagId, slotIndex)
     end
