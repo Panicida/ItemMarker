@@ -13,7 +13,8 @@ local panelData = {
 local textureChoices = {
     ItemMarkerControl.texturePaths[ItemMarkerConstants.textures.star],
     ItemMarkerControl.texturePaths[ItemMarkerConstants.textures.sell],
-    ItemMarkerControl.texturePaths[ItemMarkerConstants.textures.lock]
+    ItemMarkerControl.texturePaths[ItemMarkerConstants.textures.lock],
+    ItemMarkerControl.texturePaths[ItemMarkerConstants.textures.forbidden]
 }
 
 local optionsData = {

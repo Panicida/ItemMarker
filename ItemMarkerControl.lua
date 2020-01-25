@@ -5,8 +5,9 @@ ItemMarkerControl.sellMarkerName = "ItemMarker_Sell"
 ItemMarkerControl.libFilters = LibFilters3
 ItemMarkerControl.texturePaths = {
     [ItemMarkerConstants.textures.star] = [[/esoui/art/campaign/overview_indexicon_bonus_disabled.dds]],
-    [ItemMarkerConstants.textures.sell] = [[esoui\art\inventory\inventory_sell_forbidden_icon.dds]],
-    [ItemMarkerConstants.textures.lock] = [[esoui\art\inventory\inventory_sell_forbidden_icon.dds]]
+    [ItemMarkerConstants.textures.sell] = [[esoui\art\vendor\vendor_tabicon_sell_over.dds]],
+    [ItemMarkerConstants.textures.lock] = [[esoui\art\miscellaneous\status_locked.dds]],
+    [ItemMarkerConstants.textures.forbidden] = [[esoui\art\inventory\inventory_sell_forbidden_icon.dds]]
 }
 
 function ItemMarkerControl:RefreshControl(itemInstanceId, control)
