@@ -1,6 +1,7 @@
 ItemMarkerConfig = {}
 
 ItemMarkerConfig.name = "ItemMarker"
+ItemMarkerConfig.version = "0.0.1"
 ItemMarkerConfig.event = "ItemMarkerEvent"
 ItemMarkerConfig.savedVariablesFile = "ItemMarkerSavedVariables"
 

@@ -26,6 +26,14 @@ function ItemMarkerData:IsItemMarked(itemInstanceId)
     return markInfo
 end
 
+function ItemMarkerData:GetTexture(mark)
+    return self.savedVariables.texture[mark]
+end
+
+function ItemMarkerData:SetTexture(mark, texture)
+    self.savedVariables.texture[mark] = texture
+end
+
 function ItemMarkerData:Initialize()
     local defaults = {
         markedItems = {

@@ -9,9 +9,6 @@ ItemMarkerControl.texturePaths = {
     [ItemMarkerConstants.textures.lock] = [[esoui\art\inventory\inventory_sell_forbidden_icon.dds]]
 }
 
-
-
-
 function ItemMarkerControl:RefreshControl(itemInstanceId, control)
     local function getMarkerAnchorOffsets(markerAnchor)
         local offsetValue = 10

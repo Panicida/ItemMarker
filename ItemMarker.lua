@@ -49,6 +49,7 @@ end
 function ItemMarker:Initialize()
     ItemMarkerControl.libFilters:InitializeLibFilters()
     ItemMarkerData:Initialize()
+    ItemMarkerSettings:Initialize()
     self:HookPlayerInventories()
     ZO_PreHook("ZO_InventorySlot_ShowContextMenu", function(inventorySlotControl) self:AddMenuOption(inventorySlotControl) end)
 end

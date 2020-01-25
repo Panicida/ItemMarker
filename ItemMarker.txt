@@ -3,7 +3,7 @@
 ## APIVersion: 100029
 ## Version: 0.0.1
 ## SavedVariables: ItemMarkerSavedVariables
-## DependsOn: LibCustomMenu LibFilters-3.0
+## DependsOn: LibCustomMenu LibFilters-3.0 LibAddonMenu-2.0
 
 i18n\en.lua
 i18n\$(language).lua
@@ -12,4 +12,5 @@ ItemMarkerConfig.lua
 ItemMarkerUtils.lua
 ItemMarkerData.lua
 ItemMarkerControl.lua
+ItemMarkerSettings.lua
 ItemMarker.lua
