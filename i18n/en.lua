@@ -1,2 +1,2 @@
-ZO_CreateStringId("STR_ITEMMARKER_MARK_ITEM", "Mark item")
-ZO_CreateStringId("STR_ITEMMARKER_UNMARK_ITEM", "Unmark item")
+ZO_CreateStringId("PanicidaStr_ItemMarker_MarkItem", "Mark item")
+ZO_CreateStringId("PanicidaStr_ItemMarker_UnmarkItem", "Unmark item")

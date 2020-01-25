@@ -1,8 +1,5 @@
 ItemMarkerData = {}
 
-
-
-
 function ItemMarkerData:GetMarkerAnchor()
     return self.savedVariables.markerAnchor
 end
@@ -28,7 +25,8 @@ function ItemMarkerData:Initialize()
         markedItems = {},
         marker = "star",
         markerAnchor = 3,
-        markerColor = "ffff00"
+        markerColor = "ffff00",
+        recipies = {}
     }
 
     self.savedVariables = ZO_SavedVars:NewAccountWide(ItemMarkerConfig.savedVariablesFile, 1, nil, defaults)

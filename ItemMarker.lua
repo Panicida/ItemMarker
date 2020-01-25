@@ -13,11 +13,11 @@ function ItemMarker:AddMenuOption(inventorySlotControl)
 
         if not isItemMarked then
             zo_callLater(function ()
-                AddCustomMenuItem(GetString(STR_ITEMMARKER_MARK_ITEM), function() self:ToogleItem(itemInstanceId, inventorySlotControl) end)
+                AddCustomMenuItem(GetString(PanicidaStr_ItemMarker_MarkItem), function() self:ToogleItem(itemInstanceId, inventorySlotControl) end)
             end, 50)
         else
             zo_callLater(function ()
-                AddCustomMenuItem(GetString(STR_ITEMMARKER_UNMARK_ITEM), function() self:ToogleItem(itemInstanceId, inventorySlotControl) end)
+                AddCustomMenuItem(GetString(PanicidaStr_ItemMarker_UnmarkItem), function() self:ToogleItem(itemInstanceId, inventorySlotControl) end)
             end, 50)
         end
     end
@@ -49,22 +49,5 @@ local function OnAddOnLoaded(eventCode, addonName)
     end
 end
 
--- local function OnInventorySingleSlotUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
---     local itemInstanceId = GetInstanceId(bagId, slotIndex)
---     -- local control = 
-
-    
---     ItemMarkerControl:RefreshControl(itemInstanceId, control)
--- end
 
 EVENT_MANAGER:RegisterForEvent(ItemMarkerConfig.name, EVENT_ADD_ON_LOADED, OnAddOnLoaded)
--- EVENT_MANAGER:RegisterForEvent(ItemMarkerConfig.event, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, OnInventorySingleSlotUpdate)
--- EVENT_MANAGER:AddFilterForEvent(ItemMarkerConfig.event, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, REGISTER_FILTER_BAG_ID, BAG_WORN)
--- EVENT_MANAGER:AddFilterForEvent(ItemMarkerConfig.event, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, REGISTER_FILTER_IS_NEW_ITEM, false)
--- EVENT_MANAGER:AddFilterForEvent(ItemMarkerConfig.event, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, REGISTER_FILTER_INVENTORY_UPDATE_REASON, INVENTORY_UPDATE_REASON_DEFAULT)
-
-
-
-
-
-

@@ -1,6 +1,6 @@
 ## Title: Item Marker
 ## Author: Panicida
-## APIVersion: 100028
+## APIVersion: 100029
 ## Version: 0.0.1
 ## SavedVariables: ItemMarkerSavedVariables
 ## DependsOn: LibCustomMenu LibFilters-3.0
