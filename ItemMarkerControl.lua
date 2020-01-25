@@ -1,7 +1,16 @@
 ItemMarkerControl = {}
 
-ItemMarkerControl.markerName = "ItemMarker"
+ItemMarkerControl.keepMarkerName = "ItemMarker_Keep"
+ItemMarkerControl.sellMarkerName = "ItemMarker_Sell"
 ItemMarkerControl.libFilters = LibFilters3
+ItemMarkerControl.texturePaths = {
+    [ItemMarkerConstants.textures.star] = [[/esoui/art/campaign/overview_indexicon_bonus_disabled.dds]],
+    [ItemMarkerConstants.textures.sell] = [[esoui\art\inventory\inventory_sell_forbidden_icon.dds]],
+    [ItemMarkerConstants.textures.lock] = [[esoui\art\inventory\inventory_sell_forbidden_icon.dds]]
+}
+
+
+
 
 function ItemMarkerControl:RefreshControl(itemInstanceId, control)
     local function getMarkerAnchorOffsets(markerAnchor)
@@ -48,43 +57,43 @@ function ItemMarkerControl:RefreshControl(itemInstanceId, control)
         return offsets[markerAnchor].x, offsets[markerAnchor].y
     end
 
-    local isItemMarked = ItemMarkerData:IsItemMarked(itemInstanceId)
-    local markerControl = control:GetNamedChild(self.markerName)
+    local function refreshControl(mark, isMarked, markerName, markerAnchor)
+        local markerControl = control:GetNamedChild(markerName)
 
-    if markerControl and not isItemMarked then
-        markerControl:SetHidden(true)
-        return
-    elseif not isItemMarked then
-        return
+        if not markerControl then
+            markerControl = WINDOW_MANAGER:CreateControl(control:GetName() .. markerName, control, CT_TEXTURE)
+            markerControl:SetDimensions(32, 32)
+            markerControl:SetDrawTier(DT_HIGH)
+        end
+
+        local texture, r, g, b = ItemMarkerData:GetMarkerInfo(mark, itemInstanceId)
+        local anchorTarget = control:GetNamedChild("Button")
+        local offsetX, offsetY = getMarkerAnchorOffsets(markerAnchor)
+
+        if anchorTarget then
+            --list control
+            anchorTarget = anchorTarget:GetNamedChild("Icon")
+        else
+            --equipment control
+            anchorTarget = control:GetNamedChild("Icon")
+        end
+
+        --there's no anchor target. How'd we get here?
+        if not anchorTarget then
+            return
+        end
+
+        markerControl:SetHidden(not isMarked)
+        markerControl:SetTexture(self.texturePaths[texture])
+        markerControl:SetColor(r, g, b)
+        markerControl:ClearAnchors()
+        markerControl:SetAnchor(markerAnchor, anchorTarget, markerAnchor, offsetX, offsetY)
     end
 
-    if not markerControl then
-        markerControl = WINDOW_MANAGER:CreateControl(control:GetName() .. ItemMarkerControl.markerName, control, CT_TEXTURE)
-        markerControl:SetDimensions(32, 32)
-        markerControl:SetDrawTier(DT_HIGH)
-    end
-
-    local texturePath, r, g, b = ItemMarkerData:GetMarkerInfo(itemInstanceId)
-    local markerAnchor = ItemMarkerData:GetMarkerAnchor()
-    local anchorTarget = control:GetNamedChild("Button")
-    local offsetX, offsetY = getMarkerAnchorOffsets(markerAnchor)
-
-    if anchorTarget then
-        --list control
-        anchorTarget = anchorTarget:GetNamedChild("Icon")
-    else
-        --equipment control
-        anchorTarget = control:GetNamedChild("Icon")
-    end
-
-    --there's no anchor target. How'd we get here?
-    if not anchorTarget then return end
-
-    markerControl:SetHidden(false)
-    markerControl:SetTexture(texturePath)
-    markerControl:SetColor(r, g, b)
-    markerControl:ClearAnchors()
-    markerControl:SetAnchor(markerAnchor, anchorTarget, markerAnchor, offsetX, offsetY)    
+    local itemMarkInfo = ItemMarkerData:IsItemMarked(itemInstanceId)
+    local itemAnchorInfo = ItemMarkerData:GetMarkerAnchor()
+    refreshControl(ItemMarkerData.KEEP_MARK, itemMarkInfo.isKeep, self.keepMarkerName, itemAnchorInfo[ItemMarkerData.KEEP_MARK])
+    refreshControl(ItemMarkerData.SELL_MARK, itemMarkInfo.isSell, self.sellMarkerName, itemAnchorInfo[ItemMarkerData.SELL_MARK])
 end
 
 function ItemMarkerControl:RefreshAll()

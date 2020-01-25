@@ -1,23 +1,33 @@
 ItemMarker = {}
 
-function ItemMarker:ToogleItem(itemInstanceId, inventorySlotControl)
-    ItemMarkerData:ToogleItem(itemInstanceId)
-    ItemMarkerControl:RefreshAll(itemInstanceId, inventorySlotControl)
+function ItemMarker:ToogleItem(mark, itemInstanceId, inventorySlotControl)
+    ItemMarkerData:ToogleItem(mark, itemInstanceId)
+    ItemMarkerControl:RefreshAll()
 end
 
 function ItemMarker:AddMenuOption(inventorySlotControl)
     local itemInstanceId = ItemMarkerControl:GetInfoFromInventorySlotControl(inventorySlotControl)
 
     if itemInstanceId then
-        local isItemMarked = ItemMarkerData:IsItemMarked(itemInstanceId)
+        local itemMarkInfo = ItemMarkerData:IsItemMarked(itemInstanceId)
 
-        if not isItemMarked then
+        if not itemMarkInfo.isKeep then
             zo_callLater(function ()
-                AddCustomMenuItem(GetString(PanicidaStr_ItemMarker_MarkItem), function() self:ToogleItem(itemInstanceId, inventorySlotControl) end)
+                AddCustomMenuItem(GetString(PanicidaStr_ItemMarker_MarkKeepItem), function() self:ToogleItem(ItemMarkerData.KEEP_MARK, itemInstanceId, inventorySlotControl) end)
             end, 50)
         else
             zo_callLater(function ()
-                AddCustomMenuItem(GetString(PanicidaStr_ItemMarker_UnmarkItem), function() self:ToogleItem(itemInstanceId, inventorySlotControl) end)
+                AddCustomMenuItem(GetString(PanicidaStr_ItemMarker_UnmarkKeepItem), function() self:ToogleItem(ItemMarkerData.KEEP_MARK, itemInstanceId, inventorySlotControl) end)
+            end, 50)
+        end
+
+        if not itemMarkInfo.isSell then
+            zo_callLater(function ()
+                AddCustomMenuItem(GetString(PanicidaStr_ItemMarker_MarkSellItem), function() self:ToogleItem(ItemMarkerData.SELL_MARK, itemInstanceId, inventorySlotControl) end)
+            end, 50)
+        else
+            zo_callLater(function ()
+                AddCustomMenuItem(GetString(PanicidaStr_ItemMarker_UnmarkSellItem), function() self:ToogleItem(ItemMarkerData.SELL_MARK, itemInstanceId, inventorySlotControl) end)
             end, 50)
         end
     end

@@ -3,9 +3,6 @@ ItemMarkerConfig = {}
 ItemMarkerConfig.name = "ItemMarker"
 ItemMarkerConfig.event = "ItemMarkerEvent"
 ItemMarkerConfig.savedVariablesFile = "ItemMarkerSavedVariables"
-ItemMarkerConfig.markersInfo = {
-    star = [[/esoui/art/campaign/overview_indexicon_bonus_disabled.dds]]
-}
 
 ItemMarkerConfig.lists = {
     -- Backpack
