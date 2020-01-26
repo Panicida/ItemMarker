@@ -2,7 +2,6 @@ ItemMarkerControl = {}
 
 ItemMarkerControl.keepMarkerName = "ItemMarker_Keep"
 ItemMarkerControl.sellMarkerName = "ItemMarker_Sell"
-ItemMarkerControl.libFilters = LibFilters3
 ItemMarkerControl.texturePaths = {
     [ItemMarkerConstants.textures.star] = [[/esoui/art/campaign/overview_indexicon_bonus_disabled.dds]],
     [ItemMarkerConstants.textures.sell] = [[esoui\art\vendor\vendor_tabicon_sell_over.dds]],
@@ -96,11 +95,11 @@ end
 
 function ItemMarkerControl:RefreshAll()
     for _, list in pairs(ItemMarkerConfig.lists) do
-        LibFilters3:RequestUpdate(list.filter)
+        ItemMarkerFilter:RequestUpdate(list.filter)
     end
 end
 
-function ItemMarkerControl:GetInfoFromInventorySlotControl(inventorySlotControl)
+function ItemMarkerControl:GetItemInstanceIdFromInventorySlotControl(inventorySlotControl)
     local bagId, slotIndex
     local link = nil
     local slotType = ZO_InventorySlot_GetType(inventorySlotControl)
@@ -110,6 +109,12 @@ function ItemMarkerControl:GetInfoFromInventorySlotControl(inventorySlotControl)
         link = GetItemLink(bagId, slotIndex)
     end
 
+    -- if settings.useUniqueIds and allowedItemType then
+    --     itemId = zo_getSafeId64Key(GetItemUniqueId(bagId, slotIndex))
+    -- else
+    --     itemId = GetItemInstanceId(bagId, slotIndex)
+    -- end
+
     if link and ItemMarkerUtils:IsItemLink(link) then
         return GetItemInstanceId(bagId, slotIndex)
     end
@@ -117,7 +122,7 @@ function ItemMarkerControl:GetInfoFromInventorySlotControl(inventorySlotControl)
     return nil
 end
 
-function ItemMarkerControl:GetInfoFromControl(control)
+function ItemMarkerControl:GetItemInstanceIdFromControl(control)
     local bagId, slotIndex
 
     bagId = control.dataEntry.data.bagId

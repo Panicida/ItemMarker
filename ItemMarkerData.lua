@@ -1,7 +1,7 @@
 ItemMarkerData = {}
 
-ItemMarkerData.KEEP_MARK = 0
-ItemMarkerData.SELL_MARK = 1
+ItemMarkerData.KEEP_MARK = 1
+ItemMarkerData.SELL_MARK = 2
 
 function ItemMarkerData:GetMarkerAnchor()
     return self.savedVariables.markerAnchor
@@ -16,10 +16,17 @@ function ItemMarkerData:GetMarkerInfo(mark, itemInstanceId)
 end
 
 function ItemMarkerData:ToogleItem(mark, itemInstanceId)
+    itemInstanceId = tostring(itemInstanceId)
+
+    ItemMarkerDebug:log("Toogle", mark, "of", itemInstanceId)
+    ItemMarkerDebug:log("Before", self.savedVariables.markedItems[mark][itemInstanceId])
     self.savedVariables.markedItems[mark][itemInstanceId] = not self.savedVariables.markedItems[mark][itemInstanceId] or nil
+    ItemMarkerDebug:log("After", self.savedVariables.markedItems[mark][itemInstanceId])
 end
 
 function ItemMarkerData:IsItemMarked(itemInstanceId)
+    itemInstanceId = tostring(itemInstanceId)
+
     local markInfo = {}
     markInfo.isKeep = self.savedVariables.markedItems[self.KEEP_MARK][itemInstanceId]
     markInfo.isSell = self.savedVariables.markedItems[self.SELL_MARK][itemInstanceId]

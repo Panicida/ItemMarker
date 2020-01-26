@@ -6,7 +6,7 @@ function ItemMarker:ToogleItem(mark, itemInstanceId, inventorySlotControl)
 end
 
 function ItemMarker:AddMenuOption(inventorySlotControl)
-    local itemInstanceId = ItemMarkerControl:GetInfoFromInventorySlotControl(inventorySlotControl)
+    local itemInstanceId = ItemMarkerControl:GetItemInstanceIdFromInventorySlotControl(inventorySlotControl)
 
     if itemInstanceId then
         local itemMarkInfo = ItemMarkerData:IsItemMarked(itemInstanceId)
@@ -37,7 +37,7 @@ function ItemMarker:HookPlayerInventories()
     for _, list in pairs(ItemMarkerConfig.lists) do
         if list.listView and list.listView.dataTypes and list.listView.dataTypes[1] then
             ZO_PreHook(list.listView.dataTypes[1], "setupCallback", function(control, slot)
-                local itemInstanceId = ItemMarkerControl:GetInfoFromControl(control)
+                local itemInstanceId = ItemMarkerControl:GetItemInstanceIdFromControl(control)
                 if itemInstanceId then
                     ItemMarkerControl:RefreshControl(itemInstanceId, control)
                 end
@@ -47,8 +47,8 @@ function ItemMarker:HookPlayerInventories()
 end
 
 function ItemMarker:Initialize()
-    ItemMarkerControl.libFilters:InitializeLibFilters()
     ItemMarkerData:Initialize()
+    ItemMarkerFilter:Initialize()
     ItemMarkerSettings:Initialize()
     self:HookPlayerInventories()
     ZO_PreHook("ZO_InventorySlot_ShowContextMenu", function(inventorySlotControl) self:AddMenuOption(inventorySlotControl) end)

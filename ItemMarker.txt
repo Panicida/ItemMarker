@@ -7,10 +7,12 @@
 
 i18n\en.lua
 i18n\$(language).lua
+ItemMarkerDebug.lua
 ItemMarkerConstants.lua
 ItemMarkerConfig.lua
 ItemMarkerUtils.lua
 ItemMarkerData.lua
 ItemMarkerControl.lua
+ItemMarkerFilter.lua
 ItemMarkerSettings.lua
 ItemMarker.lua
